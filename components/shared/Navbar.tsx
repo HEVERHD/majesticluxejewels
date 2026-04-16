@@ -1,0 +1,86 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { siteConfig } from "@/lib/site.config";
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#e8e0d5]">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex flex-col leading-tight">
+          <span className="font-serif text-xl font-semibold text-[#0f0f0f] tracking-wide">
+            Majestic Luxe
+          </span>
+          <span className="text-xs tracking-[0.2em] text-[#b8964a] uppercase font-light">
+            Jewels
+          </span>
+        </Link>
+
+        {/* Nav desktop */}
+        <nav className="hidden md:flex items-center gap-10">
+          <Link
+            href="/"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+          >
+            Inicio
+          </Link>
+          <Link
+            href="/catalogo"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+          >
+            Catálogo
+          </Link>
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+          >
+            Contacto
+          </a>
+        </nav>
+
+        {/* Botón menú mobile */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-[#0f0f0f]"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="md:hidden bg-white border-t border-[#e8e0d5] px-6 py-6 flex flex-col gap-5">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+          >
+            Inicio
+          </Link>
+          <Link
+            href="/catalogo"
+            onClick={() => setOpen(false)}
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+          >
+            Catálogo
+          </Link>
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+          >
+            Contacto
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}
