@@ -43,7 +43,7 @@ export default async function CatalogoPage({ searchParams }: Props) {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-[#0f0f0f] py-16 px-6 text-center">
-        <p className="text-xs tracking-[0.3em] uppercase text-[#b8964a] mb-3">Colección</p>
+        <p className="text-xs tracking-[0.3em] uppercase text-[#c9a84c] mb-3">Colección</p>
         <h1 className="font-serif text-4xl md:text-5xl font-medium text-white">
           Nuestro Catálogo
         </h1>

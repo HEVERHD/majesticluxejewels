@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -40,8 +40,18 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-10">
-          <div className="font-serif text-3xl font-semibold text-white mb-1">Majestic Luxe</div>
-          <div className="text-xs tracking-[0.25em] text-[#b8964a] uppercase">Jewels · Admin</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/MAJESTIClogosolo.png"
+            alt="Majestic Luxe Jewels"
+            className="h-16 w-auto object-contain mx-auto mb-3"
+          />
+          <div className="font-serif text-2xl font-semibold text-white tracking-[0.25em] uppercase mb-1">
+            Majestic Luxe
+          </div>
+          <div className="font-serif text-[0.6rem] tracking-[0.35em] text-[#c9a84c] uppercase">
+            Jewels · Admin
+          </div>
         </div>
 
         <div className="bg-white p-10">
@@ -49,7 +59,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="text-xs tracking-[0.1em] uppercase text-[#6b6b6b] block mb-2">
+              <label className="text-xs tracking-widest uppercase text-[#6b6b6b] block mb-2">
                 Email
               </label>
               <input
@@ -57,13 +67,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border border-[#ddd] px-4 py-3 text-sm focus:outline-none focus:border-[#b8964a] transition-colors"
+                className="w-full border border-[#ddd] px-4 py-3 text-sm focus:outline-none focus:border-[#c9a84c] transition-colors"
                 placeholder="admin@ejemplo.com"
               />
             </div>
 
             <div>
-              <label className="text-xs tracking-[0.1em] uppercase text-[#6b6b6b] block mb-2">
+              <label className="text-xs tracking-widest uppercase text-[#6b6b6b] block mb-2">
                 Contraseña
               </label>
               <input
@@ -71,7 +81,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border border-[#ddd] px-4 py-3 text-sm focus:outline-none focus:border-[#b8964a] transition-colors"
+                className="w-full border border-[#ddd] px-4 py-3 text-sm focus:outline-none focus:border-[#c9a84c] transition-colors"
                 placeholder="••••••••"
               />
             </div>
@@ -83,7 +93,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#b8964a] text-white py-4 text-sm tracking-widest uppercase hover:bg-[#8a6e35] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-[#c9a84c] text-white py-4 text-sm tracking-widest uppercase hover:bg-[#9a7a2e] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Ingresando..." : "Ingresar"}
             </button>

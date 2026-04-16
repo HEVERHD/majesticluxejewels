@@ -45,9 +45,9 @@ export default async function ProductoPage({ params }: Props) {
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-[#6b6b6b] mb-10">
-          <Link href="/" className="hover:text-[#b8964a] transition-colors">Inicio</Link>
+          <Link href="/" className="hover:text-[#c9a84c] transition-colors">Inicio</Link>
           <span>/</span>
-          <Link href="/catalogo" className="hover:text-[#b8964a] transition-colors">Catálogo</Link>
+          <Link href="/catalogo" className="hover:text-[#c9a84c] transition-colors">Catálogo</Link>
           <span>/</span>
           <span className="text-[#0f0f0f]">{product.name}</span>
         </div>
@@ -66,7 +66,7 @@ export default async function ProductoPage({ params }: Props) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               ) : (
-                <div className="flex items-center justify-center h-full text-[#b8964a] text-6xl">
+                <div className="flex items-center justify-center h-full text-[#c9a84c] text-6xl">
                   ◈
                 </div>
               )}
@@ -93,7 +93,7 @@ export default async function ProductoPage({ params }: Props) {
           {/* Info */}
           <div className="flex flex-col justify-center">
             {product.category && (
-              <p className="text-xs tracking-[0.2em] uppercase text-[#b8964a] mb-3">
+              <p className="text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-3">
                 {product.category.name}
               </p>
             )}
@@ -102,7 +102,7 @@ export default async function ProductoPage({ params }: Props) {
               {product.name}
             </h1>
 
-            <p className="font-serif text-3xl text-[#b8964a] mb-6 font-light">
+            <p className="font-serif text-3xl text-[#c9a84c] mb-6 font-light">
               {formatPrice(product.price)}
             </p>
 
@@ -135,7 +135,7 @@ export default async function ProductoPage({ params }: Props) {
 
             <Link
               href="/catalogo"
-              className="inline-flex items-center justify-center gap-2 border border-[#ddd] text-[#6b6b6b] w-full py-4 text-sm tracking-widest uppercase hover:border-[#b8964a] hover:text-[#b8964a] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-[#ddd] text-[#6b6b6b] w-full py-4 text-sm tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
             >
               <ArrowLeft size={16} /> Ver más piezas
             </Link>

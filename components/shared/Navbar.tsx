@@ -12,26 +12,34 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#e8e0d5]">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex flex-col leading-tight">
-          <span className="font-serif text-xl font-semibold text-[#0f0f0f] tracking-wide">
-            Majestic Luxe
-          </span>
-          <span className="text-xs tracking-[0.2em] text-[#b8964a] uppercase font-light">
-            Jewels
-          </span>
+        <Link href="/" className="flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/MAJESTIClogosolo.png"
+            alt="Majestic Luxe Jewels"
+            className="h-12 w-auto object-contain"
+          />
+          <div className="flex flex-col leading-none">
+            <span className="font-serif text-base font-semibold tracking-[0.25em] uppercase text-[#0f0f0f]">
+              Majestic Luxe
+            </span>
+            <span className="font-serif text-[0.6rem] tracking-[0.35em] uppercase text-[#c9a84c] mt-0.5">
+              Jewels
+            </span>
+          </div>
         </Link>
 
         {/* Nav desktop */}
         <nav className="hidden md:flex items-center gap-10">
           <Link
             href="/"
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c] transition-colors"
           >
             Inicio
           </Link>
           <Link
             href="/catalogo"
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c] transition-colors"
           >
             Catálogo
           </Link>
@@ -39,7 +47,7 @@ export default function Navbar() {
             href={`https://wa.me/${siteConfig.whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c] transition-colors"
           >
             Contacto
           </a>
@@ -60,14 +68,14 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setOpen(false)}
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c]"
           >
             Inicio
           </Link>
           <Link
             href="/catalogo"
             onClick={() => setOpen(false)}
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c]"
           >
             Catálogo
           </Link>
@@ -75,7 +83,7 @@ export default function Navbar() {
             href={`https://wa.me/${siteConfig.whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#b8964a]"
+            className="text-sm tracking-wide text-[#6b6b6b] hover:text-[#c9a84c]"
           >
             Contacto
           </a>

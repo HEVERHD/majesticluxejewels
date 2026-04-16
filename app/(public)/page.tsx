@@ -42,13 +42,13 @@ export default async function HomePage() {
         />
         <div className="relative z-20 max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-2xl">
-            <p className="text-[#b8964a] text-xs tracking-[0.3em] uppercase mb-6 animate-fade-up">
+            <p className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase mb-6 animate-fade-up">
               Colección exclusiva
             </p>
             <h1 className="font-serif text-5xl md:text-7xl font-medium text-white leading-tight mb-6 animate-fade-up-delay-1">
               Elegancia que
               <br />
-              <em className="text-[#b8964a]">trasciende</em> el tiempo
+              <em className="text-[#c9a84c]">trasciende</em> el tiempo
             </h1>
             <p className="text-gray-300 text-lg font-light leading-relaxed mb-10 animate-fade-up-delay-2">
               {siteConfig.description}
@@ -56,7 +56,7 @@ export default async function HomePage() {
             <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
               <Link
                 href="/catalogo"
-                className="inline-flex items-center gap-2 bg-[#b8964a] text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-[#8a6e35] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#c9a84c] text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-[#9a7a2e] transition-colors"
               >
                 Ver Catálogo <ArrowRight size={16} />
               </Link>
@@ -64,7 +64,7 @@ export default async function HomePage() {
                 href={`https://wa.me/${siteConfig.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-white/40 text-white px-8 py-4 text-sm tracking-widest uppercase hover:border-[#b8964a] hover:text-[#b8964a] transition-colors"
+                className="inline-flex items-center gap-2 border border-white/40 text-white px-8 py-4 text-sm tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
               >
                 Contactar
               </a>
@@ -82,7 +82,7 @@ export default async function HomePage() {
             { icon: "✦", title: "Envío seguro", desc: "Packaging exclusivo y envío asegurado a todo el país" },
           ].map((item) => (
             <div key={item.title} className="flex items-start gap-4">
-              <span className="text-[#b8964a] text-lg mt-1">{item.icon}</span>
+              <span className="text-[#c9a84c] text-lg mt-1">{item.icon}</span>
               <div>
                 <h3 className="font-serif text-base font-semibold text-[#0f0f0f] mb-1">{item.title}</h3>
                 <p className="text-sm text-[#6b6b6b] font-light leading-relaxed">{item.desc}</p>
@@ -97,7 +97,7 @@ export default async function HomePage() {
         <section className="py-20 px-6 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-xs tracking-[0.3em] uppercase text-[#b8964a] mb-3">Explorar</p>
+              <p className="text-xs tracking-[0.3em] uppercase text-[#c9a84c] mb-3">Explorar</p>
               <h2 className="font-serif text-4xl font-medium text-[#0f0f0f]">Nuestras Categorías</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -109,12 +109,12 @@ export default async function HomePage() {
                 >
                   <Gem
                     size={24}
-                    className="mx-auto mb-3 text-[#b8964a] group-hover:text-[#d4af6e] transition-colors"
+                    className="mx-auto mb-3 text-[#c9a84c] group-hover:text-[#d4af6e] transition-colors"
                   />
                   <p className="font-serif text-sm font-medium text-[#0f0f0f] group-hover:text-white transition-colors">
                     {cat.name}
                   </p>
-                  <p className="text-xs text-[#b8964a] mt-1">
+                  <p className="text-xs text-[#c9a84c] mt-1">
                     {cat._count.products} piezas
                   </p>
                 </Link>
@@ -130,12 +130,12 @@ export default async function HomePage() {
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-12">
               <div>
-                <p className="text-xs tracking-[0.3em] uppercase text-[#b8964a] mb-3">Selección especial</p>
+                <p className="text-xs tracking-[0.3em] uppercase text-[#c9a84c] mb-3">Selección especial</p>
                 <h2 className="font-serif text-4xl font-medium text-[#0f0f0f]">Piezas Destacadas</h2>
               </div>
               <Link
                 href="/catalogo"
-                className="hidden md:inline-flex items-center gap-2 text-sm text-[#6b6b6b] hover:text-[#b8964a] transition-colors"
+                className="hidden md:inline-flex items-center gap-2 text-sm text-[#6b6b6b] hover:text-[#c9a84c] transition-colors"
               >
                 Ver todo <ArrowRight size={16} />
               </Link>
@@ -150,7 +150,7 @@ export default async function HomePage() {
             <div className="text-center mt-10 md:hidden">
               <Link
                 href="/catalogo"
-                className="inline-flex items-center gap-2 text-sm text-[#b8964a] border border-[#b8964a] px-6 py-3"
+                className="inline-flex items-center gap-2 text-sm text-[#c9a84c] border border-[#c9a84c] px-6 py-3"
               >
                 Ver catálogo completo <ArrowRight size={16} />
               </Link>
@@ -162,7 +162,7 @@ export default async function HomePage() {
       {/* CTA WhatsApp */}
       <section className="bg-[#0f0f0f] py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-[#b8964a] mb-4">¿Buscas algo especial?</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-[#c9a84c] mb-4">¿Buscas algo especial?</p>
           <h2 className="font-serif text-4xl font-medium text-white mb-6">
             Joyas personalizadas para ti
           </h2>

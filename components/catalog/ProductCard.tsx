@@ -26,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         {product.featured && (
-          <span className="absolute top-3 left-3 bg-[#b8964a] text-white text-[10px] tracking-[0.15em] uppercase px-2 py-1">
+          <span className="absolute top-3 left-3 bg-[#c9a84c] text-white text-[10px] tracking-[0.15em] uppercase px-2 py-1">
             Destacado
           </span>
         )}
@@ -34,11 +34,11 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       {product.category && (
-        <p className="text-[10px] tracking-[0.2em] uppercase text-[#b8964a] mb-1 font-medium">
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#c9a84c] mb-1 font-medium">
           {product.category.name}
         </p>
       )}
-      <h3 className="font-serif text-base font-medium text-[#0f0f0f] mb-1 group-hover:text-[#b8964a] transition-colors line-clamp-2">
+      <h3 className="font-serif text-base font-medium text-[#0f0f0f] mb-1 group-hover:text-[#c9a84c] transition-colors line-clamp-2">
         {product.name}
       </h3>
       <p className="text-sm text-[#6b6b6b] font-light">{formatPrice(product.price)}</p>

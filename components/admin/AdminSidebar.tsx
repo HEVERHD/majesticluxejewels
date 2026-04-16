@@ -24,8 +24,8 @@ export default function AdminSidebar() {
     <aside className="w-64 bg-[#0f0f0f] flex flex-col shrink-0 min-h-screen">
       {/* Logo */}
       <div className="px-6 py-8 border-b border-white/10">
-        <div className="font-serif text-lg font-semibold text-white">Majestic Luxe</div>
-        <div className="text-[10px] tracking-[0.2em] text-[#b8964a] uppercase">Panel Admin</div>
+        <div className="font-serif text-lg font-semibold text-white tracking-widest uppercase">Majestic Luxe</div>
+        <div className="text-[0.6rem] tracking-[0.35em] text-[#c9a84c] uppercase">Panel Admin</div>
       </div>
 
       {/* Nav */}
@@ -39,7 +39,7 @@ export default function AdminSidebar() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 text-sm transition-all rounded-none",
                 active
-                  ? "bg-[#b8964a] text-white"
+                  ? "bg-[#c9a84c] text-white"
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               )}
             >

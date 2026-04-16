@@ -7,8 +7,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand */}
         <div>
-          <div className="font-serif text-2xl font-semibold mb-1">Majestic Luxe</div>
-          <div className="text-xs tracking-[0.25em] text-[#b8964a] uppercase mb-4">Jewels</div>
+          <div className="flex items-center gap-3 mb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/MAJESTIClogosolo.png"
+              alt="Majestic Luxe Jewels"
+              className="h-12 w-auto object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-serif text-base font-semibold tracking-[0.25em] uppercase text-white">
+                Majestic Luxe
+              </span>
+              <span className="font-serif text-[0.6rem] tracking-[0.35em] uppercase text-[#c9a84c] mt-0.5">
+                Jewels
+              </span>
+            </div>
+          </div>
           <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
             {siteConfig.description}
           </p>
