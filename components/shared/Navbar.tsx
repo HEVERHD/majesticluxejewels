@@ -12,21 +12,13 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#e8e0d5]">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/MAJESTIClogosolo.png"
             alt="Majestic Luxe Jewels"
-            className="h-12 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
-          <div className="flex flex-col leading-none">
-            <span className="font-serif text-base font-semibold tracking-[0.25em] uppercase text-[#0f0f0f]">
-              Majestic Luxe
-            </span>
-            <span className="font-serif text-[0.6rem] tracking-[0.35em] uppercase text-[#c9a84c] mt-0.5">
-              Jewels
-            </span>
-          </div>
         </Link>
 
         {/* Nav desktop */}

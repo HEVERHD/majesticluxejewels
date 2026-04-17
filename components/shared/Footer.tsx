@@ -8,12 +8,15 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/MAJESTIClogosolo.png"
-              alt="Majestic Luxe Jewels"
-              className="h-12 w-auto object-contain"
-            />
+            {/* Solo el ícono M: recortamos el 38% inferior (texto del logo) */}
+            <div className="w-12 overflow-hidden" style={{ height: "30px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/MAJESTIClogosolo.png"
+                alt="Majestic Luxe Jewels"
+                className="w-12 h-auto"
+              />
+            </div>
             <div className="flex flex-col leading-none">
               <span className="font-serif text-base font-semibold tracking-[0.25em] uppercase text-white">
                 Majestic Luxe

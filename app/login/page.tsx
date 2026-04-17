@@ -40,12 +40,15 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/MAJESTIClogosolo.png"
-            alt="Majestic Luxe Jewels"
-            className="h-16 w-auto object-contain mx-auto mb-3"
-          />
+          {/* Solo el ícono M centrado */}
+          <div className="overflow-hidden mx-auto mb-3" style={{ width: "80px", height: "50px" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/MAJESTIClogosolo.png"
+              alt="Majestic Luxe Jewels"
+              className="w-20 h-auto"
+            />
+          </div>
           <div className="font-serif text-2xl font-semibold text-white tracking-[0.25em] uppercase mb-1">
             Majestic Luxe
           </div>
