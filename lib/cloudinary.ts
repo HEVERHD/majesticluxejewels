@@ -14,7 +14,8 @@ export async function uploadImage(
 ) {
   const result = await cloudinary.uploader.upload(file, {
     folder,
-    transformation: [{ quality: "auto", fetch_format: "auto" }],
+    quality: "auto",
+    fetch_format: "auto",
   });
   return result.secure_url;
 }
