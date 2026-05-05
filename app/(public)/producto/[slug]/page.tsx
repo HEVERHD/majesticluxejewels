@@ -1,12 +1,12 @@
 export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatPrice, buildWhatsAppUrl } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowLeft, CheckCircle } from "lucide-react";
+import ProductGallery from "@/components/catalog/ProductGallery";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -54,40 +54,8 @@ export default async function ProductoPage({ params }: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Galería */}
-          <div>
-            <div className="relative aspect-square bg-[#f8f4ef] overflow-hidden mb-4">
-              {product.images[0] ? (
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full text-[#c9a84c] text-6xl">
-                  ◈
-                </div>
-              )}
-            </div>
-
-            {/* Thumbnails */}
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
-                {product.images.slice(0, 4).map((img, i) => (
-                  <div key={i} className="relative aspect-square bg-[#f8f4ef] overflow-hidden">
-                    <Image
-                      src={img}
-                      alt={`${product.name} ${i + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="25vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="lg:sticky lg:top-28">
+            <ProductGallery images={product.images} name={product.name} />
           </div>
 
           {/* Info */}
