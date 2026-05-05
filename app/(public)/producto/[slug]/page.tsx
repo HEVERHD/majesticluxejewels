@@ -32,7 +32,12 @@ export default async function ProductoPage({ params }: Props) {
   const product = await getProduct(slug);
   if (!product) notFound();
 
-  const productUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/producto/${slug}`;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : "https://majesticluxejewels.vercel.app");
+  const productUrl = `${baseUrl}/producto/${slug}`;
   const whatsappUrl = buildWhatsAppUrl(
     siteConfig.whatsappNumber,
     product.name,
