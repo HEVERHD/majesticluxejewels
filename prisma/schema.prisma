@@ -40,7 +40,64 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  status          OrderStatus @default(PENDING)
+  paymentMethod   PaymentMethod
+  paymentStatus   PaymentStatus @default(PENDING)
+  wompiTransactionId String?
+  firstName       String
+  lastName        String
+  phone           String
+  email           String
+  address         String
+  addressLine2    String?
+  city            String
+  department      String
+  postalCode      String?
+  notes           String?
+  newsletter      Boolean     @default(false)
+  subtotal        Float
+  shippingCost    Float
+  total           Float
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  name      String
+  image     String?
+  price     Float
+  quantity  Int
+}
+
 enum Role {
   ADMIN
   SUPER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  COD
+  WOMPI
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
 }
