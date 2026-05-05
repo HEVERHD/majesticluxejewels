@@ -51,21 +51,40 @@ export default function ProductForm({ categories, initialData }: ProductFormProp
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
 
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+    if (!cloudName || !uploadPreset) {
+      setError("Configuración de Cloudinary incompleta. Verifica NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME y NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET");
+      return;
+    }
+
     setUploading(true);
+    setError("");
     try {
       const uploaded: string[] = [];
       for (const file of files) {
         const fd = new FormData();
         fd.append("file", file);
-        const res = await fetch("/api/upload", { method: "POST", body: fd });
-        if (res.ok) {
-          const { url } = await res.json();
-          uploaded.push(url);
+        fd.append("upload_preset", uploadPreset);
+        fd.append("folder", "majestic-luxe-jewels");
+
+        const res = await fetch(
+          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+          { method: "POST", body: fd }
+        );
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error?.message || "Error al subir imagen");
         }
+
+        const data = await res.json();
+        uploaded.push(data.secure_url);
       }
       update("images", [...form.images, ...uploaded]);
-    } catch {
-      setError("Error al subir imágenes");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error al subir imágenes");
     } finally {
       setUploading(false);
     }
