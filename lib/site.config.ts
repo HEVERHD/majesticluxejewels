@@ -9,4 +9,6 @@ export const siteConfig = {
   primaryColor: "#b8964a",
   instagram: "@majesticluxejewels",
   email: "contacto@majesticluxejewels.com",
+  /** Tasa de cambio de referencia COP → USD. Actualizar periódicamente. */
+  copToUsdRate: 4200,
 };

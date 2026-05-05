@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Upload, X, Loader2 } from "lucide-react";
+import { formatPrice, formatPriceUSD } from "@/lib/utils";
+import { siteConfig } from "@/lib/site.config";
 
 type Category = { id: string; name: string };
 
@@ -210,21 +212,32 @@ export default function ProductForm({ categories, initialData }: ProductFormProp
           <div className="bg-white border border-gray-100 p-6 space-y-5">
             <div>
               <label className="text-xs tracking-[0.1em] uppercase text-gray-500 block mb-2">
-                Precio *
+                Precio * <span className="text-[#b8964a]">(COP)</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
                 <input
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="1"
                   value={form.price}
                   onChange={(e) => update("price", e.target.value)}
                   required
                   className="w-full border border-gray-200 pl-7 pr-4 py-3 text-sm focus:outline-none focus:border-[#b8964a] transition-colors"
-                  placeholder="0.00"
+                  placeholder="225000"
                 />
               </div>
+              {/* Preview formateado */}
+              {form.price && Number(form.price) > 0 && (
+                <div className="mt-2 flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#b8964a]">
+                    {formatPrice(Number(form.price))}
+                  </span>
+                  <span className="text-gray-400">
+                    ≈ {formatPriceUSD(Number(form.price), siteConfig.copToUsdRate)} USD
+                  </span>
+                </div>
+              )}
             </div>
 
             <div>
