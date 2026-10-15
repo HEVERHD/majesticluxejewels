@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withPWA from "@ducanh2912/next-pwa";
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,7 +9,6 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
-      // Imágenes de Unsplash (usadas en el hero del home)
       {
         protocol: "https",
         hostname: "images.unsplash.com",
@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Turbopack: evita errores con módulos nativos de Node.js (Cloudinary SDK)
   turbopack: {
     resolveAlias: {
       "encoding": { browser: "./empty.ts" },
@@ -24,4 +23,13 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  disable: process.env.NODE_ENV === "development",
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+})(nextConfig);
