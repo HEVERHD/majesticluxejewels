@@ -81,7 +81,12 @@ export default function CheckoutPage() {
       });
 
       if (!res.ok) throw new Error("Error al crear pedido");
-      const { order } = await res.json();
+      const { order, adminNotifyUrl } = await res.json();
+
+      // Abrir notificación WhatsApp al admin en nueva pestaña
+      if (adminNotifyUrl) {
+        window.open(adminNotifyUrl, "_blank", "noopener,noreferrer");
+      }
 
       if (tab === "COD") {
         clearCart();

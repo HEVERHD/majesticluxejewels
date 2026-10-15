@@ -5,7 +5,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatPrice, buildWhatsAppUrl } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Droplets, Wind, Sparkles, ShieldCheck } from "lucide-react";
 import ProductGallery from "@/components/catalog/ProductGallery";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -33,10 +33,7 @@ export default async function ProductoPage({ params }: Props) {
   if (!product) notFound();
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : "https://majesticluxejewels.vercel.app");
+    process.env.NEXT_PUBLIC_SITE_URL || "https://majesticluxejewels.com";
   const productUrl = `${baseUrl}/producto/${slug}`;
   const whatsappUrl = buildWhatsAppUrl(
     siteConfig.whatsappNumber,
@@ -65,11 +62,16 @@ export default async function ProductoPage({ params }: Props) {
 
           {/* Info */}
           <div className="flex flex-col justify-center">
-            {product.category && (
-              <p className="text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-3">
-                {product.category.name}
-              </p>
-            )}
+            <div className="flex items-center gap-3 mb-3">
+              {product.category && (
+                <p className="text-xs tracking-[0.2em] uppercase text-[#c9a84c]">
+                  {product.category.name}
+                </p>
+              )}
+              <span className="text-[9px] tracking-[0.15em] uppercase bg-[#0f0f0f] text-[#c9a84c] px-2 py-1">
+                Oro Laminado
+              </span>
+            </div>
 
             <h1 className="font-serif text-4xl md:text-5xl font-medium text-[#0f0f0f] mb-6 leading-tight">
               {product.name}
@@ -80,17 +82,32 @@ export default async function ProductoPage({ params }: Props) {
             </p>
 
             {product.description && (
-              <p className="text-[#6b6b6b] leading-relaxed mb-8 font-light text-sm">
+              <p className="text-[#6b6b6b] leading-relaxed mb-6 font-light text-sm">
                 {product.description}
               </p>
             )}
 
             {/* Stock */}
-            <div className="flex items-center gap-2 mb-8">
+            <div className="flex items-center gap-2 mb-6">
               <CheckCircle size={16} className={product.stock > 0 ? "text-green-500" : "text-gray-400"} />
               <span className="text-sm text-[#6b6b6b]">
                 {product.stock > 0 ? `Disponible (${product.stock} en stock)` : "Sin stock"}
               </span>
+            </div>
+
+            {/* Garantías rápidas */}
+            <div className="grid grid-cols-2 gap-2 mb-8">
+              {[
+                { icon: ShieldCheck, text: "Garantía de calidad" },
+                { icon: Sparkles,    text: "Acabado premium" },
+                { icon: Droplets,    text: "Resistente al roce" },
+                { icon: Wind,        text: "Envío 2-5 días" },
+              ].map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-2 bg-[#f8f4ef] px-3 py-2">
+                  <Icon size={13} className="text-[#c9a84c] shrink-0" />
+                  <span className="text-[11px] text-[#6b6b6b]">{text}</span>
+                </div>
+              ))}
             </div>
 
             {/* CTA WhatsApp */}
@@ -112,6 +129,37 @@ export default async function ProductoPage({ params }: Props) {
             >
               <ArrowLeft size={16} /> Ver más piezas
             </Link>
+          </div>
+        </div>
+
+        {/* Cuidados del producto */}
+        <div className="mt-16 border-t border-[#e8e0d5] pt-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <p className="text-xs tracking-[0.35em] uppercase text-[#c9a84c] mb-3">Cuida tu joya</p>
+              <h2 className="font-serif text-2xl font-medium text-[#0f0f0f] mb-4">
+                Cómo mantenerla como nueva
+              </h2>
+              <p className="text-sm text-[#6b6b6b] leading-relaxed">
+                El oro laminado es duradero, pero con los cuidados correctos durará mucho más.
+                Estos simples hábitos protegen el acabado de tu pieza.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { tip: "Retírala antes de bañarte o nadar" },
+                { tip: "Aplica perfume antes de ponértela" },
+                { tip: "Guárdala separada en su caja" },
+                { tip: "Límpiala con un paño suave y seco" },
+              ].map((c, i) => (
+                <div key={i} className="flex gap-3 p-3 border border-[#e8e0d5]">
+                  <span className="font-serif text-lg text-[#e8e0d5] font-bold shrink-0 leading-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-xs text-[#6b6b6b] leading-relaxed">{c.tip}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

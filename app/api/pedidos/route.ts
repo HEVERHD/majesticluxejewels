@@ -58,7 +58,19 @@ export async function POST(req: NextRequest) {
       include: { items: true },
     });
 
-    return NextResponse.json({ order }, { status: 201 });
+    // Notificación WhatsApp al admin (abre un link pre-cargado en la respuesta)
+    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "18633482679";
+    const notifyText = encodeURIComponent(
+      `🛍️ *Nuevo pedido* ${orderNumber}\n` +
+      `👤 ${firstName} ${lastName}\n` +
+      `📞 ${phone}\n` +
+      `💰 $${total.toLocaleString("es-CO")} COP\n` +
+      `💳 ${paymentMethod === "COD" ? "Contra entrega" : "Wompi"}\n` +
+      `📍 ${city}, ${department}`
+    );
+    const adminNotifyUrl = `https://wa.me/${adminPhone}?text=${notifyText}`;
+
+    return NextResponse.json({ order, adminNotifyUrl }, { status: 201 });
   } catch (err) {
     console.error("[POST /api/pedidos]", err);
     return NextResponse.json({ error: "Error al crear el pedido" }, { status: 500 });

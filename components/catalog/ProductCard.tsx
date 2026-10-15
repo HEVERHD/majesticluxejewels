@@ -55,6 +55,9 @@ export default function ProductCard({ product }: { product: Product }) {
             Destacado
           </span>
         )}
+        <span className="absolute top-3 right-3 bg-[#0f0f0f]/80 text-[#c9a84c] text-[9px] tracking-[0.12em] uppercase px-2 py-1 z-10 backdrop-blur-sm">
+          Oro Laminado
+        </span>
 
         {/* Add to cart overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">

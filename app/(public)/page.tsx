@@ -6,6 +6,13 @@ import { prisma } from "@/lib/prisma";
 import ProductCard from "@/components/catalog/ProductCard";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowRight, Gem, Shield, Truck, Star } from "lucide-react";
+import OroLaminadoExplainer from "@/components/trust/OroLaminadoExplainer";
+import Testimonios from "@/components/trust/Testimonios";
+import Garantia from "@/components/trust/Garantia";
+import CuidadosOro from "@/components/trust/CuidadosOro";
+import MetodosPago from "@/components/trust/MetodosPago";
+import FAQ from "@/components/trust/FAQ";
+import ContadorClientes from "@/components/trust/ContadorClientes";
 
 async function getFeaturedProducts() {
   return prisma.product.findMany({
@@ -78,8 +85,8 @@ export default async function HomePage() {
           <div className="order-1 lg:order-2 grid grid-cols-2 gap-3">
             <div className="aspect-[3/4] bg-[#e8e0d5] overflow-hidden relative">
               <Image
-                src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&q=80"
-                alt="Joyería"
+                src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80"
+                alt="Collar de oro laminado"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 50vw, 25vw"
@@ -87,8 +94,8 @@ export default async function HomePage() {
             </div>
             <div className="aspect-[3/4] bg-[#e8e0d5] overflow-hidden relative mt-8">
               <Image
-                src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80"
-                alt="Joyería de lujo"
+                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80"
+                alt="Aretes de oro laminado"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 50vw, 25vw"
@@ -121,6 +128,9 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Oro laminado explainer */}
+      <OroLaminadoExplainer />
 
       {/* Categorías */}
       {categories.length > 0 && (
@@ -196,7 +206,22 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Banner Oro Laminado style */}
+      {/* Contador de clientes — prueba social */}
+      <ContadorClientes />
+
+      {/* Testimonios */}
+      <Testimonios />
+
+      {/* Garantía */}
+      <Garantia />
+
+      {/* Cuidados del oro */}
+      <CuidadosOro />
+
+      {/* FAQ */}
+      <FAQ />
+
+      {/* Banner por qué elegirnos */}
       <section className="bg-[#f8f4ef] py-16 px-6 border-y border-[#e8e0d5]">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
@@ -231,6 +256,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Métodos de pago */}
+      <MetodosPago />
 
       {/* CTA WhatsApp */}
       <section className="bg-[#0f0f0f] py-20 px-6">

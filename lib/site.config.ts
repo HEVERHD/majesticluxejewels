@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Majestic Luxe Jewels",
   tagline: "Elegancia que trasciende el tiempo",
   description:
-    "Descubre nuestra exclusiva colección de joyas de lujo. Piezas únicas creadas para quienes aprecian la perfección.",
+    "Joyas en oro laminado de alta calidad. Piezas únicas con el brillo del oro auténtico, duraderas y accesibles. Creadas para quienes aprecian la elegancia.",
   whatsappNumber: "18633482679", // Cambia por tu número real (código país + número)
   whatsappMessage: "Hola, me interesa este producto de Majestic Luxe Jewels:",
   logo: "/logo.svg",

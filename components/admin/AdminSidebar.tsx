@@ -38,22 +38,32 @@ export default function AdminSidebar() {
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className="px-6 py-7 border-b border-white/10 flex items-center justify-between">
-        <div>
-          <div className="font-serif text-base font-semibold text-white tracking-widest uppercase">
-            Majestic Luxe
+      <div className="px-5 py-6 border-b border-white/10 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-[#0f0f0f] border border-[#c9a84c]/30 overflow-hidden shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logoOficial.jpeg"
+              alt="Majestic Luxe Jewels"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="text-[0.6rem] tracking-[0.35em] text-[#c9a84c] uppercase">
-            Panel Admin
+          <div>
+            <div className="font-serif text-sm font-semibold text-white tracking-widest uppercase leading-none">
+              Majestic Luxe
+            </div>
+            <div className="text-[0.55rem] tracking-[0.3em] text-[#c9a84c] uppercase mt-0.5">
+              Admin
+            </div>
           </div>
         </div>
         {/* Close button — mobile only */}
         <button
           onClick={() => setOpen(false)}
-          className="lg:hidden text-gray-400 hover:text-white p-1"
+          className="lg:hidden text-gray-500 hover:text-white p-1 transition-colors"
           aria-label="Cerrar menú"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
       </div>
 
