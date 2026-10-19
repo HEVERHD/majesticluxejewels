@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logoOficial.jpeg"
+              src="/logoOficialpng.png"
               alt="Majestic Luxe Jewels"
               className="h-16 w-auto object-contain"
             />

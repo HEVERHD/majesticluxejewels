@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/logoOficial.jpeg",
-    apple: "/logoOficial.jpeg",
+    icon: "/logoOficialpng.png",
+    apple: "/logoOficialpng.png",
   },
 };
 

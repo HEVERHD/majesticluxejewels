@@ -92,7 +92,7 @@ export default function PWAInstallModal() {
           <div className="flex items-center gap-4 mb-5">
             <div className="w-14 h-14 rounded-xl overflow-hidden border border-[#c9a84c]/30 shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logoOficial.jpeg" alt="Majestic Luxe Jewels" className="w-full h-full object-cover" />
+              <img src="/logoOficialpng.png" alt="Majestic Luxe Jewels" className="w-full h-full object-cover" />
             </div>
             <div>
               <p className="font-serif text-white font-semibold text-base leading-tight">

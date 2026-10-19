@@ -18,7 +18,7 @@ export default function Navbar() {
           <div className="w-12 h-12 rounded-full bg-[#0f0f0f] overflow-hidden flex items-center justify-center ring-1 ring-[#c9a84c]/40 group-hover:ring-[#c9a84c] transition-all">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logoOficial.jpeg"
+              src="/logoOficialpng.png"
               alt="Majestic Luxe Jewels"
               className="w-11 h-11 object-cover"
             />

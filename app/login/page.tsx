@@ -52,7 +52,7 @@ export default function LoginPage() {
           <div className="w-20 h-20 rounded-full bg-[#0f0f0f] border border-[#c9a84c]/30 overflow-hidden flex items-center justify-center mx-auto mb-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logoOficial.jpeg"
+              src="/logoOficialpng.png"
               alt="Majestic Luxe Jewels"
               className="w-full h-full object-cover"
             />

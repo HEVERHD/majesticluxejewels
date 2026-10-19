@@ -43,7 +43,7 @@ export default function AdminSidebar() {
           <div className="w-9 h-9 rounded-full bg-[#0f0f0f] border border-[#c9a84c]/30 overflow-hidden shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logoOficial.jpeg"
+              src="/logoOficialpng.png"
               alt="Majestic Luxe Jewels"
               className="w-full h-full object-cover"
             />
