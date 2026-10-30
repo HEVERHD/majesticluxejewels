@@ -39,7 +39,11 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "Nombre y precio son requeridos" }, { status: 400 });
     }
 
-    const slug = slugify(name);
+    let slug = slugify(name);
+
+    // Si el slug ya existe, agrega un sufijo único
+    const existing = await prisma.product.findUnique({ where: { slug } });
+    if (existing) slug = `${slug}-${Date.now()}`;
 
     const product = await prisma.product.create({
       data: {
@@ -59,6 +63,7 @@ export async function POST(request: NextRequest) {
     return Response.json(product, { status: 201 });
   } catch (error) {
     console.error("[PRODUCTS POST]", error);
-    return Response.json({ error: "Error del servidor" }, { status: 500 });
+    const msg = error instanceof Error ? error.message : "Error desconocido";
+    return Response.json({ error: `Error del servidor: ${msg}` }, { status: 500 });
   }
 }
