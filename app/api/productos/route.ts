@@ -63,7 +63,6 @@ export async function POST(request: NextRequest) {
     return Response.json(product, { status: 201 });
   } catch (error) {
     console.error("[PRODUCTS POST]", error);
-    const msg = error instanceof Error ? error.message : "Error desconocido";
-    return Response.json({ error: `Error del servidor: ${msg}` }, { status: 500 });
+    return Response.json({ error: "Error del servidor" }, { status: 500 });
   }
 }

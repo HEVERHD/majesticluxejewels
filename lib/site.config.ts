@@ -8,6 +8,9 @@ export const siteConfig = {
   logo: "/logo.svg",
   primaryColor: "#b8964a",
   instagram: "@majesticluxejewels",
+  instagramUrl: "https://www.instagram.com/majesticluxejewels",
+  facebookUrl: "https://www.facebook.com/share/1MnZj5B2ra/",
+  tiktokUrl: "https://www.tiktok.com/@majestic.luxe.jew",
   email: "contacto@majesticluxejewels.com",
   /** Tasa de cambio de referencia COP → USD. Actualizar periódicamente. */
   copToUsdRate: 4200,
