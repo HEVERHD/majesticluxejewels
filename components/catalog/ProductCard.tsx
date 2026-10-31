@@ -15,6 +15,7 @@ type Product = {
   images: string[];
   category: { name: string } | null;
   featured: boolean;
+  stock: number;
 };
 
 export default function ProductCard({ product }: { product: Product }) {
