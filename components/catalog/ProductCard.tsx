@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatPriceUSD } from "@/lib/utils";
+import { siteConfig } from "@/lib/site.config";
 import { useCart } from "@/context/CartContext";
 
 type Product = {
@@ -80,7 +81,18 @@ export default function ProductCard({ product }: { product: Product }) {
       <h3 className="font-serif text-base font-medium text-[#0f0f0f] mb-1 group-hover:text-[#c9a84c] transition-colors line-clamp-2">
         {product.name}
       </h3>
-      <p className="text-sm text-[#6b6b6b] font-light">{formatPrice(product.price)}</p>
+      <div className="flex items-baseline gap-2">
+        <p className="text-sm text-[#6b6b6b] font-light">{formatPrice(product.price)}</p>
+        <p className="text-xs text-gray-400">≈ {formatPriceUSD(product.price, siteConfig.copToUsdRate)}</p>
+      </div>
+      {product.stock > 0 && product.stock <= 3 && (
+        <div className="flex items-center gap-1.5 mt-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse shrink-0" />
+          <span className="text-[10px] text-red-500 font-medium">
+            Solo {product.stock} {product.stock === 1 ? "disponible" : "disponibles"}
+          </span>
+        </div>
+      )}
     </Link>
   );
 }

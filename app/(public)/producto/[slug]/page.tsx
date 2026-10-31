@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { formatPrice, buildWhatsAppUrl } from "@/lib/utils";
+import { formatPrice, formatPriceUSD, buildWhatsAppUrl } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowLeft, CheckCircle, Droplets, Wind, Sparkles, ShieldCheck } from "lucide-react";
 import ProductGallery from "@/components/catalog/ProductGallery";
@@ -77,9 +77,14 @@ export default async function ProductoPage({ params }: Props) {
               {product.name}
             </h1>
 
-            <p className="font-serif text-3xl text-[#c9a84c] mb-6 font-light">
-              {formatPrice(product.price)}
-            </p>
+            <div className="flex items-baseline gap-3 mb-6">
+              <p className="font-serif text-3xl text-[#c9a84c] font-light">
+                {formatPrice(product.price)}
+              </p>
+              <p className="text-sm text-gray-400 font-light">
+                ≈ {formatPriceUSD(product.price, siteConfig.copToUsdRate)}
+              </p>
+            </div>
 
             {product.description && (
               <p className="text-[#6b6b6b] leading-relaxed mb-6 font-light text-sm">
@@ -91,8 +96,14 @@ export default async function ProductoPage({ params }: Props) {
             <div className="flex items-center gap-2 mb-6">
               <CheckCircle size={16} className={product.stock > 0 ? "text-green-500" : "text-gray-400"} />
               <span className="text-sm text-[#6b6b6b]">
-                {product.stock > 0 ? `Disponible (${product.stock} en stock)` : "Sin stock"}
+                {product.stock > 0 ? `Disponible` : "Sin stock"}
               </span>
+              {product.stock > 0 && product.stock <= 3 && (
+                <span className="flex items-center gap-1 bg-red-50 border border-red-100 px-2 py-0.5 text-[11px] text-red-500 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                  Solo {product.stock} {product.stock === 1 ? "disponible" : "disponibles"}
+                </span>
+              )}
             </div>
 
             {/* Garantías rápidas */}

@@ -109,7 +109,8 @@ export default function ProductForm({ categories, initialData }: ProductFormProp
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          price: parseFloat(form.price),
+          // Limpia "85.000" → 85000 y "85,000" → 85000
+          price: parseFloat(String(form.price).replace(/\./g, "").replace(",", ".")),
           stock: parseInt(form.stock),
           categoryId: form.categoryId || null,
         }),
@@ -236,27 +237,29 @@ export default function ProductForm({ categories, initialData }: ProductFormProp
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
                 <input
-                  type="number"
-                  min="0"
-                  step="1"
+                  type="text"
+                  inputMode="numeric"
                   value={form.price}
-                  onChange={(e) => update("price", e.target.value)}
+                  onChange={(e) => {
+                    // Permite dígitos, puntos y comas — los limpia al parsear
+                    const raw = e.target.value.replace(/[^0-9.,]/g, "");
+                    update("price", raw);
+                  }}
                   required
                   className="w-full border border-gray-200 pl-7 pr-4 py-3 text-sm focus:outline-none focus:border-[#b8964a] transition-colors"
-                  placeholder="225000"
+                  placeholder="85000"
                 />
               </div>
               {/* Preview formateado */}
-              {form.price && Number(form.price) > 0 && (
-                <div className="mt-2 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-[#b8964a]">
-                    {formatPrice(Number(form.price))}
-                  </span>
-                  <span className="text-gray-400">
-                    ≈ {formatPriceUSD(Number(form.price), siteConfig.copToUsdRate)} USD
-                  </span>
-                </div>
-              )}
+              {(() => {
+                const clean = parseFloat(String(form.price).replace(/\./g, "").replace(",", "."));
+                return clean > 0 ? (
+                  <div className="mt-2 flex items-center justify-between text-xs">
+                    <span className="font-semibold text-[#b8964a]">{formatPrice(clean)}</span>
+                    <span className="text-gray-400">≈ {formatPriceUSD(clean, siteConfig.copToUsdRate)} USD</span>
+                  </div>
+                ) : null;
+              })()}
             </div>
 
             <div>
