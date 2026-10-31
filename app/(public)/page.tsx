@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import ProductCard from "@/components/catalog/ProductCard";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowRight, Gem, Shield, Truck, Star } from "lucide-react";
-import HeroVideo from "@/components/home/HeroVideo";
+import HeroProducts from "@/components/home/HeroProducts";
 import OroLaminadoExplainer from "@/components/trust/OroLaminadoExplainer";
 import Testimonios from "@/components/trust/Testimonios";
 import Garantia from "@/components/trust/Garantia";
@@ -38,8 +38,10 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero con video + partículas */}
-      <HeroVideo />
+      {/* Hero con imágenes reales de productos */}
+      <HeroProducts
+        images={featured.flatMap((p) => p.images).slice(0, 3)}
+      />
 
       {/* Beneficios strip */}
       <section className="bg-white border-b border-[#e8e0d5]">

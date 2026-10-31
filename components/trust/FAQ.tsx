@@ -7,10 +7,10 @@ const preguntas = [
   {
     pregunta: "¿El oro laminado se pone negro o verde?",
     respuesta:
-      "No, si se cuida correctamente. A diferencia del chapado convencional, el oro laminado tiene una capa mucho más gruesa. La decoloración ocurre cuando se expone a químicos (cloro, perfumes, sudor ácido) de forma frecuente. Con los cuidados básicos que te explicamos, tu pieza se mantiene brillante por años.",
+      "No, si se cuida correctamente. El oro laminado tiene una capa de oro de alta pureza mucho más gruesa que otros métodos. La decoloración ocurre cuando se expone a químicos (cloro, perfumes, sudor ácido) de forma frecuente. Con los cuidados básicos que te explicamos, tu pieza se mantiene brillante por años.",
   },
   {
-    pregunta: "¿Cuánto dura el baño de oro?",
+    pregunta: "¿Qué tan duradero es el oro laminado?",
     respuesta:
       "Con uso cotidiano y cuidados adecuados, las piezas mantienen su apariencia entre 1 y 3 años o más. La durabilidad depende directamente de cuánto se expone la pieza a agua, sudor y químicos. Clientes que siguen nuestras instrucciones de cuidado reportan piezas en perfecto estado después de 2+ años.",
   },

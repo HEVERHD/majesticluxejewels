@@ -2,7 +2,7 @@ const cuidados = [
   {
     numero: "01",
     titulo: "Evita el agua",
-    desc: "Retira tus joyas antes de bañarte, nadar o lavar. El cloro y el agua salada aceleran el desgaste del baño de oro.",
+    desc: "Retira tus joyas antes de bañarte, nadar o lavar. El cloro y el agua salada afectan el acabado del oro laminado.",
   },
   {
     numero: "02",
@@ -22,7 +22,7 @@ const cuidados = [
   {
     numero: "05",
     titulo: "Evita el sudor excesivo",
-    desc: "El sudor contiene sal y ácidos que deterioran el baño. Retíralas antes de hacer ejercicio.",
+    desc: "El sudor contiene sal y ácidos que deterioran el laminado de oro. Retíralas antes de hacer ejercicio.",
   },
   {
     numero: "06",

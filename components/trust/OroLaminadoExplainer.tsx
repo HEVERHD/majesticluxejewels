@@ -4,7 +4,7 @@ const items = [
   {
     icon: Layers,
     title: "¿Qué es el oro laminado?",
-    desc: "Es una capa de oro de alta pureza (18k–24k) soldada por presión sobre una base de metal de calidad. A diferencia del chapado común, la capa es significativamente más gruesa y duradera.",
+    desc: "Es una capa de oro de alta pureza (18k–24k) soldada por presión sobre una base de metal de calidad. El proceso garantiza una capa significativamente más gruesa y duradera que métodos convencionales.",
   },
   {
     icon: Zap,
@@ -60,7 +60,7 @@ export default function OroLaminadoExplainer() {
         {/* Diferenciador visual */}
         <div className="mt-12 border border-[#c9a84c]/20 p-8 grid grid-cols-3 divide-x divide-[#c9a84c]/20 text-center">
           {[
-            { label: "Chapado convencional", value: "0.5 µm", sub: "Capa de oro" },
+            { label: "Método estándar de mercado", value: "0.5 µm", sub: "Capa de oro" },
             { label: "Oro laminado Majestic", value: "≥ 2.5 µm", sub: "Capa de oro" },
             { label: "Oro sólido 18k", value: "100%", sub: "Composición" },
           ].map((col) => (
