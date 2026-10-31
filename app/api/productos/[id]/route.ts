@@ -24,26 +24,39 @@ export async function PUT(
   if (!session) return Response.json({ error: "No autorizado" }, { status: 401 });
 
   const { id } = await params;
-  const body = await request.json();
-  const { name, description, price, images, featured, stock, active, categoryId } = body;
 
-  const product = await prisma.product.update({
-    where: { id },
-    data: {
-      name,
-      slug: slugify(name),
-      description,
-      price: parseFloat(price),
-      images: images || [],
-      featured: featured || false,
-      stock: parseInt(stock) || 0,
-      active: active !== false,
-      categoryId: categoryId || null,
-    },
-    include: { category: true },
-  });
+  try {
+    const body = await request.json();
+    const { name, description, price, images, featured, stock, active, categoryId } = body;
 
-  return Response.json(product);
+    // Slug único: si otro producto ya lo usa, agrega sufijo
+    let slug = slugify(name);
+    const conflict = await prisma.product.findFirst({
+      where: { slug, id: { not: id } },
+    });
+    if (conflict) slug = `${slug}-${Date.now()}`;
+
+    const product = await prisma.product.update({
+      where: { id },
+      data: {
+        name,
+        slug,
+        description,
+        price: parseFloat(price),
+        images: images || [],
+        featured: featured || false,
+        stock: parseInt(stock) || 0,
+        active: active !== false,
+        categoryId: categoryId || null,
+      },
+      include: { category: true },
+    });
+
+    return Response.json(product);
+  } catch (error) {
+    console.error("[PRODUCTS PUT]", error);
+    return Response.json({ error: "Error del servidor" }, { status: 500 });
+  }
 }
 
 export async function DELETE(
