@@ -6,6 +6,7 @@ import { ShoppingBag } from "lucide-react";
 import { formatPrice, formatPriceUSD } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
 import { useCart } from "@/context/CartContext";
+import { haptic } from "@/lib/haptic";
 
 type Product = {
   id: string;
@@ -25,6 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
+    haptic(15);
     addItem({
       id: product.id,
       name: product.name,

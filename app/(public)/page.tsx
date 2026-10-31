@@ -1,11 +1,11 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import ProductCard from "@/components/catalog/ProductCard";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowRight, Gem, Shield, Truck, Star } from "lucide-react";
+import HeroVideo from "@/components/home/HeroVideo";
 import OroLaminadoExplainer from "@/components/trust/OroLaminadoExplainer";
 import Testimonios from "@/components/trust/Testimonios";
 import Garantia from "@/components/trust/Garantia";
@@ -38,75 +38,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-[#0f0f0f] py-2.5 text-center">
-        <p className="text-xs tracking-[0.25em] uppercase text-[#c9a84c]">
-          ✦ Envío gratis en compras mayores a $150.000 COP ✦
-        </p>
-      </div>
-
-      {/* Hero */}
-      <section className="relative bg-[#f8f4ef] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Text */}
-          <div className="order-2 lg:order-1">
-            <p className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase mb-5 animate-fade-up">
-              Joyería de lujo artesanal
-            </p>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium text-[#0f0f0f] leading-[1.1] mb-6 animate-fade-up-delay-1">
-              Piezas que
-              <br />
-              <em className="text-[#c9a84c] not-italic">cuentan</em>
-              <br />
-              tu historia
-            </h1>
-            <p className="text-[#6b6b6b] text-base leading-relaxed mb-10 max-w-md animate-fade-up-delay-2">
-              {siteConfig.description}
-            </p>
-            <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
-              <Link
-                href="/catalogo"
-                className="inline-flex items-center gap-2 bg-[#c9a84c] text-white px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#9a7a2e] transition-colors"
-              >
-                Ver Colección <ArrowRight size={14} />
-              </Link>
-              <a
-                href={`https://wa.me/${siteConfig.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-[#0f0f0f]/30 text-[#0f0f0f] px-8 py-4 text-xs tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
-              >
-                Contactar
-              </a>
-            </div>
-          </div>
-
-          {/* Image grid */}
-          <div className="order-1 lg:order-2 grid grid-cols-2 gap-3">
-            <div className="aspect-[3/4] bg-[#e8e0d5] overflow-hidden relative">
-              <Image
-                src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80"
-                alt="Collar de oro laminado"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 50vw, 25vw"
-              />
-            </div>
-            <div className="aspect-[3/4] bg-[#e8e0d5] overflow-hidden relative mt-8">
-              <Image
-                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80"
-                alt="Aretes de oro laminado"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 50vw, 25vw"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Decorative line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent" />
-      </section>
+      {/* Hero con video + partículas */}
+      <HeroVideo />
 
       {/* Beneficios strip */}
       <section className="bg-white border-b border-[#e8e0d5]">

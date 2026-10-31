@@ -133,3 +133,24 @@ body {
 .animate-page-entry {
   animation: pageEntry 0.5s ease forwards;
 }
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes slideRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+.animate-slide-right {
+  animation: slideRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Safe-area helpers for bottom nav */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

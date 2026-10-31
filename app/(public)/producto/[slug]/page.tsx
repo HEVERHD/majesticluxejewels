@@ -7,6 +7,10 @@ import { formatPrice, formatPriceUSD, buildWhatsAppUrl } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
 import { ArrowLeft, CheckCircle, Droplets, Wind, Sparkles, ShieldCheck } from "lucide-react";
 import ProductGallery from "@/components/catalog/ProductGallery";
+import RelatedProducts from "@/components/catalog/RelatedProducts";
+import StickyWhatsApp from "@/components/catalog/StickyWhatsApp";
+import ShareButton from "@/components/catalog/ShareButton";
+import ProductStickyHeader from "@/components/catalog/ProductStickyHeader";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,6 +18,16 @@ async function getProduct(slug: string) {
   return prisma.product.findUnique({
     where: { slug, active: true },
     include: { category: true },
+  });
+}
+
+async function getRelated(categoryId: string | null, excludeId: string) {
+  if (!categoryId) return [];
+  return prisma.product.findMany({
+    where: { active: true, categoryId, id: { not: excludeId } },
+    include: { category: true },
+    take: 8,
+    orderBy: { createdAt: "desc" },
   });
 }
 
@@ -29,7 +43,10 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProductoPage({ params }: Props) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const [product, related] = await Promise.all([
+    getProduct(slug),
+    getProduct(slug).then((p) => p ? getRelated(p.categoryId, p.id) : []),
+  ]);
   if (!product) notFound();
 
   const baseUrl =
@@ -44,6 +61,8 @@ export default async function ProductoPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-white">
+      <ProductStickyHeader name={product.name} price={product.price} whatsappUrl={whatsappUrl} />
+      <StickyWhatsApp whatsappUrl={whatsappUrl} productName={product.name} />
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-[#6b6b6b] mb-10">
@@ -134,14 +153,20 @@ export default async function ProductoPage({ params }: Props) {
               Consultar por WhatsApp
             </a>
 
-            <Link
-              href="/catalogo"
-              className="inline-flex items-center justify-center gap-2 border border-[#ddd] text-[#6b6b6b] w-full py-4 text-sm tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
-            >
-              <ArrowLeft size={16} /> Ver más piezas
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/catalogo"
+                className="inline-flex items-center justify-center gap-2 border border-[#ddd] text-[#6b6b6b] flex-1 py-4 text-sm tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
+              >
+                <ArrowLeft size={16} /> Ver más piezas
+              </Link>
+              <ShareButton title={product.name} text={product.description ?? product.name} url={productUrl} />
+            </div>
           </div>
         </div>
+
+        {/* Productos relacionados */}
+        <RelatedProducts products={related} />
 
         {/* Cuidados del producto */}
         <div className="mt-16 border-t border-[#e8e0d5] pt-14">

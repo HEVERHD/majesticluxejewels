@@ -8,6 +8,13 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
   const [active, setActive]       = useState(0);
   const [animating, setAnimating] = useState(false);
   const [lightbox, setLightbox]   = useState(false);
+
+  // Pinch-to-zoom state
+  const [scale, setScale]         = useState(1);
+  const [origin, setOrigin]       = useState({ x: 50, y: 50 });
+  const pinchRef                  = useRef<{ dist: number; cx: number; cy: number } | null>(null);
+  const imgWrapRef                = useRef<HTMLDivElement>(null);
+
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const total = images.length;
@@ -42,6 +49,7 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
   // Cierra lightbox con Escape
   useEffect(() => {
     if (!lightbox) return;
+    setScale(1);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightbox(false);
       if (e.key === "ArrowLeft") prev();
@@ -55,6 +63,46 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox, active]);
+
+  function onLightboxTouchStart(e: React.TouchEvent) {
+    if (e.touches.length === 2) {
+      const [t1, t2] = [e.touches[0], e.touches[1]];
+      const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      const rect = imgWrapRef.current?.getBoundingClientRect();
+      const cx = rect ? ((t1.clientX + t2.clientX) / 2 - rect.left) / rect.width * 100 : 50;
+      const cy = rect ? ((t1.clientY + t2.clientY) / 2 - rect.top) / rect.height * 100 : 50;
+      pinchRef.current = { dist, cx, cy };
+    } else if (e.touches.length === 1 && scale === 1) {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+    }
+  }
+
+  function onLightboxTouchMove(e: React.TouchEvent) {
+    if (e.touches.length === 2 && pinchRef.current) {
+      e.preventDefault();
+      const [t1, t2] = [e.touches[0], e.touches[1]];
+      const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      const ratio = dist / pinchRef.current.dist;
+      setScale(Math.min(4, Math.max(1, ratio)));
+      setOrigin({ x: pinchRef.current.cx, y: pinchRef.current.cy });
+    }
+  }
+
+  function onLightboxTouchEnd(e: React.TouchEvent) {
+    if (pinchRef.current) {
+      if (scale < 1.15) { setScale(1); setOrigin({ x: 50, y: 50 }); }
+      pinchRef.current = null;
+      return;
+    }
+    if (scale > 1) return;
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) dx < 0 ? next() : prev();
+    touchStartX.current = null;
+    touchStartY.current = null;
+  }
 
   if (images.length === 0) {
     return (
@@ -142,13 +190,25 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
       {lightbox && (
         <div
           className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
-          onClick={() => setLightbox(false)}
+          onClick={() => { if (scale === 1) setLightbox(false); }}
         >
-          <div className="animate-lightbox-in relative w-full h-full flex items-center justify-center p-4"
-            onClick={(e) => e.stopPropagation()}>
-
-            {/* Imagen */}
-            <div className="relative w-full max-w-3xl max-h-[85vh] aspect-square">
+          <div
+            className="animate-lightbox-in relative w-full h-full flex items-center justify-center p-4"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={onLightboxTouchStart}
+            onTouchMove={onLightboxTouchMove}
+            onTouchEnd={onLightboxTouchEnd}
+          >
+            {/* Imagen con zoom */}
+            <div
+              ref={imgWrapRef}
+              className="relative w-full max-w-3xl max-h-[85vh] aspect-square touch-none"
+              style={{
+                transform: `scale(${scale})`,
+                transformOrigin: `${origin.x}% ${origin.y}%`,
+                transition: scale === 1 ? "transform 0.2s ease" : "none",
+              }}
+            >
               <Image
                 src={images[active]}
                 alt={`${name} — ${active + 1}`}
@@ -158,6 +218,15 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
                 priority
               />
             </div>
+
+            {scale > 1 && (
+              <button
+                onClick={() => { setScale(1); setOrigin({ x: 50, y: 50 }); }}
+                className="absolute top-14 right-4 bg-white/20 text-white px-3 py-1 text-xs rounded-full"
+              >
+                Restablecer
+              </button>
+            )}
 
             {/* Cerrar */}
             <button onClick={() => setLightbox(false)}

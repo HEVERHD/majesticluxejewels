@@ -75,11 +75,17 @@ export default function CatalogoClient({
         </div>
       ) : (
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-14 animate-page-entry"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-14"
           key={selected ?? "all"}
         >
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {filtered.map((product, i) => (
+            <div
+              key={product.id}
+              className="opacity-0 animate-fade-up"
+              style={{ animationDelay: `${i * 60}ms`, animationFillMode: "forwards" }}
+            >
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
       )}
