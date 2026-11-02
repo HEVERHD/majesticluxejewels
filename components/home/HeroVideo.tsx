@@ -6,36 +6,52 @@ import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/site.config";
 import GoldParticles from "./GoldParticles";
 
-// Video de joyas stock (Pexels – libre de uso)
+// Solo se carga en desktop — muy pesado para mobile/WebKit in-app
 const VIDEO_URL =
   "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4";
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch(() => {});
+    // No cargar video en mobile ni en navegadores in-app (WhatsApp, IG, etc.)
+    const isMobile = window.innerWidth < 768;
+    const isInApp = /FBAN|FBAV|Instagram|WhatsApp|Snapchat/i.test(navigator.userAgent);
+    if (isMobile || isInApp) return;
+
+    setShowVideo(true);
+    // Carga diferida para no bloquear LCP
+    const t = setTimeout(() => {
+      const v = videoRef.current;
+      if (!v) return;
+      v.src = VIDEO_URL;
+      v.load();
+      v.play().catch(() => {});
+    }, 800);
+    return () => clearTimeout(t);
   }, []);
 
   return (
     <section className="relative w-full h-[100svh] min-h-[600px] overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
-      {/* Video */}
-      <video
-        ref={videoRef}
-        src={VIDEO_URL}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        onCanPlay={() => setLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      {/* Fondo de gradiente (siempre visible — fallback mobile) */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#1a1408_0%,#0a0a0a_70%)]" />
+
+      {/* Video solo en desktop, cargado de forma diferida */}
+      {showVideo && (
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          preload="none"
+          onCanPlay={() => setLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
 
       {/* Overlay oscuro + degradado inferior */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
