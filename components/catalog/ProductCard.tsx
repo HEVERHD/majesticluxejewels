@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
 import { ShoppingBag } from "lucide-react";
 import { formatPrice, formatPriceUSD } from "@/lib/utils";
 import { siteConfig } from "@/lib/site.config";
@@ -22,6 +23,8 @@ type Product = {
 export default function ProductCard({ product }: { product: Product }) {
   const image = product.images[0] || "";
   const { addItem } = useCart();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glareRef = useRef<HTMLDivElement>(null);
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -36,8 +39,43 @@ export default function ProductCard({ product }: { product: Product }) {
     });
   }
 
+  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const tiltX = (0.5 - y) * 12;
+    const tiltY = (x - 0.5) * 12;
+    el.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+    if (glareRef.current) {
+      glareRef.current.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(201,168,76,0.2) 0%, transparent 65%)`;
+      glareRef.current.style.opacity = "1";
+    }
+  }
+
+  function onMouseLeave() {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+    if (glareRef.current) glareRef.current.style.opacity = "0";
+  }
+
   return (
-    <Link href={`/producto/${product.slug}`} className="group block">
+    <div
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="group relative"
+      style={{ transition: "transform 0.18s ease", transformStyle: "preserve-3d", willChange: "transform" }}
+    >
+      {/* Brillo dorado que sigue el cursor */}
+      <div
+        ref={glareRef}
+        className="absolute inset-0 pointer-events-none z-20 opacity-0 rounded-[inherit]"
+        style={{ transition: "opacity 0.25s ease" }}
+      />
+    <Link href={`/producto/${product.slug}`} className="block">
       {/* Image */}
       <div className="relative overflow-hidden bg-[#f8f4ef] aspect-square mb-4">
         {image ? (
@@ -97,5 +135,6 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       )}
     </Link>
+    </div>
   );
 }
